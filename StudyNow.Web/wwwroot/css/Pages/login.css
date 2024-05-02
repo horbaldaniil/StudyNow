@@ -58,13 +58,4 @@
 }
 .login--section .inner button {
   margin-top: 45px;
-  background-color: var(--orange);
-  border: none;
-  border-radius: 2px;
-  width: 140px;
-  height: 40px;
-  font-weight: 900;
-  font-size: 24px;
-  color: #FFFFFF;
-  cursor: pointer;
 }
