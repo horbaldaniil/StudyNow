@@ -30,7 +30,48 @@
             margin-top: 60px;
             margin-bottom: 15px;
         }
-        
+
+        .form--list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 20px;
+            justify-content: center;
+            padding: 0 70px;
+        }
+
+        .form--block {
+            display: flex;
+            flex-direction: column;
+            width: 47%;
+
+
+            label {
+                font-weight: 300;
+                font-size: 18px;
+                line-height: 22px;
+                color: var(--dark-grey);
+                margin-bottom: 3px;
+            }
+
+            input {
+                border: 1px solid var(--orange);
+                border-radius: 2px;
+                padding: 10px;
+                font-family: "Inter", sans-serif;
+                font-size: 18px;
+                font-weight: 300;
+                color: #000;
+            }
+
+            input::placeholder {
+                color: var(--dark-grey);
+            }
+
+            input:focus {
+                outline: none;
+            }
+        }
+
         .buttons {
             display: flex;
             justify-content: center;
@@ -40,5 +81,34 @@
         button {
             margin-top: 35px;
         }
+
+        select {
+            border: 1px solid var(--orange);
+            border-radius: 2px;
+            padding: 10px;
+            font-family: "Inter", sans-serif;
+            font-size: 18px;
+            font-weight: 300;
+            color: #000;
+        }
+
+        select:focus {
+            outline: none;
+        }
+
+        a {
+            font-size: 14px;
+            font-weight: 300;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #000;
+        }
     }
+}
+
+
+.icon-back {
+    position: absolute;
+    top: 50px;
+    left: 50px;
 }

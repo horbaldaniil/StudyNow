@@ -14,7 +14,20 @@ namespace StudyNow.Web.Controllers
         [Route("signup")]
         public IActionResult SignUp()
         {
-            return View("SignUp");
+            return View();
         }
+
+        [Route("signup-student")]
+        public IActionResult SignUpStudent()
+        {
+            return View();
+        }
+
+        [Route("signup-admin")]
+        public IActionResult SignUpAdmin()
+        {
+            return View();
+        }
+
     }
 }

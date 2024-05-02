@@ -28,6 +28,40 @@
   margin-top: 60px;
   margin-bottom: 15px;
 }
+.signup--section .inner .form--list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 20px;
+  justify-content: center;
+  padding: 0 70px;
+}
+.signup--section .inner .form--block {
+  display: flex;
+  flex-direction: column;
+  width: 47%;
+}
+.signup--section .inner .form--block label {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--dark-grey);
+  margin-bottom: 3px;
+}
+.signup--section .inner .form--block input {
+  border: 1px solid var(--orange);
+  border-radius: 2px;
+  padding: 10px;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: #000;
+}
+.signup--section .inner .form--block input::placeholder {
+  color: var(--dark-grey);
+}
+.signup--section .inner .form--block input:focus {
+  outline: none;
+}
 .signup--section .inner .buttons {
   display: flex;
   justify-content: center;
@@ -35,4 +69,29 @@
 }
 .signup--section .inner button {
   margin-top: 35px;
+}
+.signup--section .inner select {
+  border: 1px solid var(--orange);
+  border-radius: 2px;
+  padding: 10px;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: #000;
+}
+.signup--section .inner select:focus {
+  outline: none;
+}
+.signup--section .inner a {
+  font-size: 14px;
+  font-weight: 300;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #000;
+}
+
+.icon-back {
+  position: absolute;
+  top: 50px;
+  left: 50px;
 }
