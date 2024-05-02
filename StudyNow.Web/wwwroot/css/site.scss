@@ -1,0 +1,16 @@
+@import "Pages/login.scss";
+@import "Pages/signup.scss";
+@import "button.scss";
+@import "css-vars.scss";
+* {
+    padding: 0;
+    margin: 0;
+}
+html {
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: #F7F3F2;
+}

@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Вхід";
+}
+
+<div class="login--section">
+    <div class="inner">
+        <img src="/icons/logo.svg" />
+        <h3>Увійти в аккаунт</h3>
+        <div class="form--block">
+            <label for="email">Пошта</label>
+            <input type="email" name="email" placeholder="your@mail.com" />
+        </div>
+        <div class="form--block">
+            <label for="password">Пароль</label>
+            <input type="password" name="password" placeholder="yourpassword" />
+        </div>
+        <button class="button button-orange" type="submit">Увійти</button>
+        <a asp-action="SignUp">Зареєстуватися</a>
+    </div>
+</div>

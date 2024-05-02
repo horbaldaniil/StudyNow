@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Реєстрація";
+}
+
+
+<div class="signup--section">
+    <div class="inner">
+        <img src="/icons/logo.svg" />
+        <h3>Зареєструватися як</h3>
+        <div class="buttons">
+            <button onclick="location.href='@Url.Action("SignUpStudent","Authorization")'" class="button button-orange">Студент</button>
+            <button onclick="location.href='@Url.Action("SignUpAdmin","Authorization")'" class="button button-orange">Адмін</button>
+        </div>
+        <a asp-action="Login">Увійти</a>
+    </div>
+</div>

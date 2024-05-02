@@ -1,0 +1,14 @@
+﻿.button {
+  border: none;
+  border-radius: 2px;
+  font-weight: 900;
+  font-size: 24px;
+  color: #FFFFFF;
+  cursor: pointer;
+  min-width: 150px;
+  padding: 0 35px;
+  height: 40px;
+}
+.button-orange {
+  background-color: var(--orange);
+}
