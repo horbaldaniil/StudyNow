@@ -1,0 +1,55 @@
+.lessons-admin--section {
+    &-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 40px 50px;
+
+        &-item {
+            background-color: #fff;
+            border-radius: 5px;
+            height: 220px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 30px 30px 30px;
+            box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+
+            h3 {
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 29px;
+                color: #000000;
+            }
+
+            p, h5 {
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 19px;
+                color: #555555;
+            }
+
+            h5 {
+                font-weight: 600;
+                margin-top: 5px;
+            }
+
+            .date, .teacher {
+                margin-top: 10px;
+            }
+
+            .groups {
+                position: absolute;
+                bottom: 30px;
+            }
+
+            &-buttons {
+                position: absolute;
+                right: 20px;
+                top: 23px;
+                display: flex;
+                gap: 35px;
+            }
+        }
+    }
+}

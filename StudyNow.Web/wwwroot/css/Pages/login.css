@@ -59,7 +59,7 @@
 .login--section .inner button {
   margin-top: 45px;
 }
-.login--section .inner a {
+.login--section .inner .signup {
   font-size: 14px;
   font-weight: 300;
   margin-top: 10px;
