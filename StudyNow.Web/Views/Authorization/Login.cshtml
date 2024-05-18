@@ -1,20 +1,25 @@
-﻿@{
+﻿@model StudyNow.Web.Models.LoginViewModel
+
+@{
     ViewData["Title"] = "Вхід";
 }
 
 <div class="login--section">
-    <div class="inner">
+    <form asp-action="Login" method="post" class="inner">
         <img src="/icons/logo.svg" />
         <h3>Увійти в аккаунт</h3>
         <div class="form--block">
-            <label for="email">Пошта</label>
-            <input type="email" name="email" placeholder="your@mail.com" />
+            <label asp-for="Email">Пошта</label>
+            <input asp-for="Email" type="email" placeholder="your@mail.com" />
+            <span asp-validation-for="Email"></span>
         </div>
         <div class="form--block">
-            <label for="password">Пароль</label>
-            <input type="password" name="password" placeholder="yourpassword" />
+            <label asp-for ="Password">Пароль</label>
+            <input asp-for="Password" type="password" placeholder="yourpassword" />
+            <span asp-validation-for="Password"></span>
         </div>
-        <button class="button button-orange" type="submit">Увійти</button>
-        <a asp-action="SignUp">Зареєстуватися</a>
-    </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <button type="submit">Login</button>
+        <a class="signup" asp-action="Register">Зареєстуватися</a>
+    </form>
 </div>

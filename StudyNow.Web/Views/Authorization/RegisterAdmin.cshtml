@@ -1,16 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Реєстрація студента";
+    ViewData["Title"] = "Реєстрація адміна";
 }
-<a class="icon-back" asp-action="SignUp">
+<a class="icon-back" asp-action="Register">
     <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 24 24" fill="none">
         <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
 </a>
-
 <div class="signup--section">
     <div class="inner">
         <img src="/icons/logo.svg" />
-        <h3>Реєстрація студента</h3>
+        <h3>Реєстрація адміна</h3>
         <div class="form--list">
             <div class="form--block">
                 <label for="email">Пошта</label>
@@ -31,16 +30,6 @@
             <div class="form--block">
                 <label for="phonenumber">Номер телефону</label>
                 <input type="tel" name="phonenumber" placeholder="380 00 111 2222" />
-            </div>
-            <div class="form--block">
-                <label for="group">Назва групи</label>
-                
-                <select name="group">
-                    <option disabled hidden selected> -- Виберіть групу -- </option>
-                    <option value="value1">Група 1</option>
-                    <option value="value2">Група 2</option>
-                    <option value="value3">Група 3</option>
-                </select>
             </div>
         </div>
         <button class="button button-orange">Зареєструватися</button>
