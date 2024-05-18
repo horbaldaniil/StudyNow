@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyNow.Web", "StudyNow.Web\StudyNow.Web.csproj", "{13A84EC7-296A-45C5-89CA-22BC7786FFC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudyNow.Web", "StudyNow.Web\StudyNow.Web.csproj", "{13A84EC7-296A-45C5-89CA-22BC7786FFC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyNow.Bll", "StudyNow.Bll\StudyNow.Bll.csproj", "{36D95E4E-C980-472F-8C6F-3B2C3C4DDB8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudyNow.Bll", "StudyNow.Bll\StudyNow.Bll.csproj", "{36D95E4E-C980-472F-8C6F-3B2C3C4DDB8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyNow.Dal", "StudyNow.Dal\StudyNow.Dal.csproj", "{1B419BBE-5422-4354-82E7-7D3D07F86C7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudyNow.Dal", "StudyNow.Dal\StudyNow.Dal.csproj", "{1B419BBE-5422-4354-82E7-7D3D07F86C7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,33 @@
+.groups-admin--section {
+    &-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 40px 50px;
+
+        &-item {
+            background-color: #fff;
+            border-radius: 5px;
+            height: 70px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+            box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+
+            p {
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 29px;
+                color: #000000;
+            }
+
+            &-buttons {
+                position: absolute;
+                right: 20px;
+                display: flex;
+                gap: 35px;
+            }
+        }
+    }
+}

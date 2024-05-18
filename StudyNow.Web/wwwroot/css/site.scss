@@ -1,10 +1,18 @@
 @import "Pages/login.scss";
 @import "Pages/signup.scss";
+@import "Pages/subjects-admin.scss";
+@import "Pages/groups-admin.scss";
+@import "Pages/lessons-admin.scss";
+@import "Pages/assignments-admin.scss";
 @import "button.scss";
+@import "menu.scss";
+@import "title.scss";
 @import "css-vars.scss";
+
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 html {
     font-family: "Inter", sans-serif;
@@ -12,5 +20,16 @@ html {
 
 body {
     height: 100vh;
-    background-color: #F7F3F2;
+    background-color: var(--light);
+}
+
+.layout--menu {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+
+    .content {
+        width: 100%;
+        padding: 40px 60px 0 60px;
+    }
 }

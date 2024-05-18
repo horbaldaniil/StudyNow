@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StudyNow</title>
+    <link rel="icon" href="/icons/icon.svg" type="icon.svg" sizes="28x28">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/StudyNow.Web.styles.css" asp-append-version="true" />
+
+</head>
+<body>
+    <div class="layout--menu">
+        <div class="menu">
+            <img src="/icons/logo-white.svg" />
+            <div class="menu--list">
+                <ul>
+                    <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "Subjects" ? "selected" : ""))">
+                        <a asp-controller="Admin" asp-action="Subjects">Навчальні предмети</a>
+                    </li>
+                    <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "Groups" ? "selected" : ""))">
+                        <a asp-controller="Admin" asp-action="Groups">Групи</a>
+                    </li>
+                    <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "Lessons" ? "selected" : ""))">
+                        <a asp-controller="Admin" asp-action="Lessons">Заняття</a>
+                    </li>
+                    <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "Assignments" ? "selected" : ""))">
+                        <a asp-controller="Admin" asp-action="Assignments">Завдання</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="account">
+                <h3>Ви увійшли як</h3>
+                <h4>Прізвище Ім’я</h4>
+                <a class="button button-dark">Мій профіль</a>
+                <a asp-controller="Authorization" asp-action="Login" class="logout">Вийти</a>
+            </div>
+        </div>
+        <div class="content">
+            @RenderBody()
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
