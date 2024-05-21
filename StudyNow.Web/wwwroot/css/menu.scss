@@ -106,6 +106,10 @@
             cursor: pointer;
         }
 
+        .selected {
+            background-color: var(--orange);
+        }
+
         a {
             text-decoration: none;
         }

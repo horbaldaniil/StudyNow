@@ -378,6 +378,69 @@
   margin-bottom: 10px;
 }
 
+.profile h2 {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 39px;
+  color: #FFFFFF;
+  text-align: center;
+}
+.profile--title {
+  background: var(--dark);
+  border-radius: 10px;
+  padding-top: 30px;
+  padding-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.profile--title svg {
+  width: 110px;
+  height: 110px;
+  margin-bottom: 15px;
+}
+.profile--body-general-info {
+  margin-bottom: 40px;
+}
+.profile--body-general-info h2 {
+  color: var(--dark);
+  margin-bottom: 40px;
+}
+.profile--body-general-info-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px 30px;
+}
+.profile--body-general-info-list-item {
+  display: flex;
+  min-width: max-content;
+}
+.profile--body-general-info-list-item-icon {
+  margin-right: 25px;
+}
+.profile--body-general-info-list-item h5 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #6A6967;
+}
+.profile--body-general-info-list-item p {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  color: var(--dark);
+}
+.profile--body-settings h2 {
+  color: var(--dark);
+  margin-bottom: 40px;
+}
+.profile--body-settings-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
 .button {
   border: none;
   border-radius: 2px;
@@ -402,6 +465,14 @@
   line-height: 24px;
   padding: 0 15px;
   background-color: var(--dark);
+}
+.button-red {
+  background-color: var(--red);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  min-width: fit-content;
+  border-radius: 10px;
 }
 
 .menu {
@@ -496,6 +567,9 @@
   outline: none;
   cursor: pointer;
 }
+.menu .account .selected {
+  background-color: var(--orange);
+}
 .menu .account a {
   text-decoration: none;
 }
@@ -526,6 +600,7 @@
   --dark-grey: #6A6967;
   --grey: #A2A19D;
   --orange: #E67A4D;
+  --red: #FF0000;
 }
 
 .input {

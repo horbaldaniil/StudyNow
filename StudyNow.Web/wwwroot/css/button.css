@@ -23,3 +23,11 @@
   padding: 0 15px;
   background-color: var(--dark);
 }
+.button-red {
+  background-color: var(--red);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  min-width: fit-content;
+  border-radius: 10px;
+}

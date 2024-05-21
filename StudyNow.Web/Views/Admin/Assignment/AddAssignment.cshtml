@@ -1,0 +1,54 @@
+﻿@model StudyNow.Web.Models.AssignmentViewModel
+
+@{
+    Layout = "_LayoutMenu";
+    ViewData["Title"] = "Додати завдання";
+}
+
+<div class="title">
+    <h2>Додати завдання</h2>
+</div>
+
+<div class="add-edit--section">
+    <form asp-action="AddAssignment" method="post" class="inner">
+        <div class="form--block">
+            <label asp-for="Title">Назва<span class="required">*</span></label>
+            <input asp-for="Title" type="text" placeholder="Назва завдання" class="input"/>
+            <span asp-validation-for="Title"></span>
+        </div>
+        <div class="form--block">
+            <label asp-for="SubjectId">Навчальний предмет<span class="required">*</span></label>
+            <select asp-for="SubjectId" class="select">
+                <option disabled hidden selected> -- Виберіть предмет -- </option>
+                @foreach (var subject in Model.Subjects)
+                {
+                    <option value="@subject.SubjectId">@subject.Name</option>
+                }
+            </select>
+            <span asp-validation-for="SubjectId"></span>
+        </div>
+        <div class="form--block">
+            <label asp-for="Deadline">Дата та час<span class="required">*</span></label>
+            <input asp-for="Deadline" type="datetime-local" class="input" value="@Model.Deadline.ToString("yyyy-MM-ddTHH:mm")" />
+            <span asp-validation-for="Deadline"></span>
+        </div>
+        <div class="form--block">
+            <label asp-for="Description">Опис<span class="required">*</span></label>
+            <textarea asp-for="Description" placeholder="Опис завдання" class="input"></textarea>
+            <span asp-validation-for="Description"></span>
+        </div>
+        <div class="form--block">
+            <label asp-for="GroupId">Група<span class="required">*</span></label>
+            <select asp-for="GroupId" class="select">
+                <option disabled hidden selected> -- Виберіть групу -- </option>
+                @foreach (var group in Model.Groups)
+                {
+                    <option value="@group.GroupId">@group.Name</option>
+                }
+            </select>
+            <span asp-validation-for="GroupId"></span>
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <button type="submit" class="button button-orange">Додати</button>
+    </form>
+</div>

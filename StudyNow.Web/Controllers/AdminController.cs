@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using StudyNow.Bll.Implementation;
 using StudyNow.Bll.Interfaces;
 using StudyNow.Dal.Entities;
@@ -14,12 +15,20 @@ namespace StudyNow.Web.Controllers
         private readonly ISubjectService _subjectService;
         private readonly IGroupService _groupService;
         private readonly ILessonService _lessonService;
+        private readonly IAssignmentService _assignmentService;
+        private readonly UserManager<IdentityUser<Guid>> _userManager;
+        private readonly SignInManager<IdentityUser<Guid>> _signInManager;
+        private readonly IUserService _userService;
 
-        public AdminController(ISubjectService subjectService, IGroupService groupService, ILessonService lessonService)
+        public AdminController(ISubjectService subjectService, IGroupService groupService, ILessonService lessonService, IAssignmentService assignmentService, UserManager<IdentityUser<Guid>> userManager, SignInManager<IdentityUser<Guid>> signInManager, IUserService userService)
         {
             _subjectService = subjectService;
             _groupService = groupService;
             _lessonService = lessonService;
+            _assignmentService = assignmentService;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -419,9 +428,211 @@ namespace StudyNow.Web.Controllers
 
         [HttpGet]
         [Route("assignments")]
-        public IActionResult Assignments()
+        public async Task<IActionResult> Assignments()
         {
-            return View("Assignment/Assignments");
+            var assignments = await _assignmentService.GetAllAssignmentsAsync();
+            var model = assignments.Select(a => new AssignmentViewModel
+            {
+                AssignmentId = a.AssignmentId,
+                Title = a.Title,
+                Description = a.Description,
+                Deadline = a.Deadline,
+                GroupName = a.Group.Name,
+                SubjectName = a.Subject.Name
+            });
+
+            return View("Assignment/Assignments", model);
         }
+
+        [HttpGet]
+        [Route("add-assignment")]
+        public async Task<IActionResult> AddAssignment()
+        {
+            var groups = await _groupService.GetAllGroupsAsync();
+            var subjects = await _subjectService.GetAllSubjectsAsync();
+            var model = new AssignmentViewModel
+            {
+                Deadline = DateTime.Now,
+                Groups = groups.Select(g => new GroupViewModel
+                {
+                    GroupId = g.GroupId,
+                    Name = g.Name
+                }).ToList(),
+                Subjects = subjects.Select(s => new SubjectViewModel
+                {
+                    SubjectId = s.SubjectId,
+                    Name = s.Name
+                }).ToList()
+            };
+            return View("Assignment/AddAssignment", model);
+        }
+
+        [HttpPost]
+        [Route("add-assignment")]
+        public async Task<IActionResult> AddAssignment(AssignmentViewModel model)
+        {
+            bool isValid = true;
+
+            if (model.GroupId == Guid.Empty)
+            {
+                ModelState.AddModelError("GroupId", "Необхідно вибрати групу.");
+                isValid = false;
+            }
+            if (model.SubjectId == Guid.Empty)
+            {
+                ModelState.AddModelError("SubjectId", "Необхідно вибрати навчальний предмет.");
+                isValid = false;
+            }
+
+            if (ModelState.IsValid)
+            {
+                var assignment = new Assignment
+                {
+                    AssignmentId = Guid.NewGuid(),
+                    Title = model.Title,
+                    Description = model.Description,
+                    Deadline = DateTime.SpecifyKind(model.Deadline, DateTimeKind.Utc),
+                    GroupId = model.GroupId,
+                    SubjectId = model.SubjectId
+                };
+                await _assignmentService.AddAssignmentAsync(assignment);
+                return RedirectToAction("Assignments");
+            }
+
+            var groups = await _groupService.GetAllGroupsAsync();
+            var subjects = await _subjectService.GetAllSubjectsAsync();
+            model.Groups = groups.Select(g => new GroupViewModel
+            {
+                GroupId = g.GroupId,
+                Name = g.Name
+            }).ToList();
+            model.Subjects = subjects.Select(s => new SubjectViewModel
+            {
+                SubjectId = s.SubjectId,
+                Name = s.Name
+            }).ToList();
+            return View("Assignment/AddAssignment", model);
+        }
+
+        [HttpGet]
+        [Route("edit-assignment/{id}")]
+        public async Task<IActionResult> EditAssignment(Guid id)
+        {
+            var assignment = await _assignmentService.GetAssignmentByIdAsync(id);
+            if (assignment == null)
+            {
+                return NotFound();
+            }
+            var groups = await _groupService.GetAllGroupsAsync();
+            var subjects = await _subjectService.GetAllSubjectsAsync();
+            var model = new AssignmentViewModel
+            {
+                AssignmentId = assignment.AssignmentId,
+                Title = assignment.Title,
+                Description = assignment.Description,
+                Deadline = assignment.Deadline,
+                GroupId = assignment.GroupId,
+                SubjectId = assignment.SubjectId,
+                Groups = groups.Select(g => new GroupViewModel
+                {
+                    GroupId = g.GroupId,
+                    Name = g.Name
+                }).ToList(),
+                Subjects = subjects.Select(s => new SubjectViewModel
+                {
+                    SubjectId = s.SubjectId,
+                    Name = s.Name
+                }).ToList()
+            };
+            return View("Assignment/EditAssignment", model);
+        }
+
+        [HttpPost]
+        [Route("edit-assignment/{id}")]
+        public async Task<IActionResult> EditAssignment(AssignmentViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var assignment = await _assignmentService.GetAssignmentByIdAsync(model.AssignmentId);
+                if (assignment == null)
+                {
+                    return NotFound();
+                }
+
+                assignment.Title = model.Title;
+                assignment.Description = model.Description;
+                assignment.Deadline = DateTime.SpecifyKind(model.Deadline, DateTimeKind.Utc);
+                assignment.GroupId = model.GroupId;
+                assignment.SubjectId = model.SubjectId;
+
+                await _assignmentService.UpdateAssignmentAsync(assignment);
+                return RedirectToAction("Assignments");
+            }
+
+            var groups = await _groupService.GetAllGroupsAsync();
+            var subjects = await _subjectService.GetAllSubjectsAsync();
+            model.Groups = groups.Select(g => new GroupViewModel
+            {
+                GroupId = g.GroupId,
+                Name = g.Name
+            }).ToList();
+            model.Subjects = subjects.Select(s => new SubjectViewModel
+            {
+                SubjectId = s.SubjectId,
+                Name = s.Name
+            }).ToList();
+            return View("Assignment/EditAssignment", model);
+        }
+
+        [HttpPost]
+        [Route("delete-assignment/{id}")]
+        public async Task<IActionResult> DeleteAssignment(Guid id)
+        {
+            await _assignmentService.DeleteAssignmentAsync(id);
+            return RedirectToAction("Assignments");
+        }
+
+        [HttpGet]
+        [Route("profile")]
+        public async Task<IActionResult> Profile()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Authorization");
+            }
+
+            var appUser = await _userService.GetUserByIdAsync(user.Id);
+            var groupName = appUser.Student?.Group?.Name ?? "Не визначено";
+
+            var model = new ProfileViewModel
+            {
+                FirstName = appUser.FirstName,
+                SecondName = appUser.SecondName,
+                Email = appUser.Email,
+                PhoneNumber = appUser.PhoneNumber,
+                UserType = appUser.Type,
+                GroupName = groupName
+            };
+
+            return View("Profile", model);
+        }
+
+        [HttpPost]
+        [Route("delete-account")]
+        public async Task<IActionResult> DeleteAccount()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Authorization");
+            }
+
+            await _userManager.DeleteAsync(user);
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

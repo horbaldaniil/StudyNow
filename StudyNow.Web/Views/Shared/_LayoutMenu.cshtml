@@ -60,7 +60,10 @@
                                 ViewContext.RouteData.Values["action"].ToString() == "AddLesson" ||
                                 ViewContext.RouteData.Values["action"].ToString() == "EditLesson" ? 
                                 "selected" : ""))"><a href="/admin/lessons">Заняття</a></li>
-                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "Assignments" ? "selected" : ""))"><a href="/admin/assignments">Завдання</a></li>
+                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" && 
+                                ViewContext.RouteData.Values["action"].ToString() == "Assignments" ||
+                                ViewContext.RouteData.Values["action"].ToString() == "AddAssignment" ||
+                                ViewContext.RouteData.Values["action"].ToString() == "EditAssignment" ? "selected" : ""))"><a href="/admin/assignments">Завдання</a></li>
                             }
                         }
                     }                    
@@ -69,7 +72,7 @@
             <div class="account">
                 <h3>Ви увійшли як</h3>
                 <h4>@appUser.SecondName @appUser.FirstName</h4>
-                <a class="button button-dark">Мій профіль</a>
+                <a asp-action="Profile" class="button button-dark @((ViewContext.RouteData.Values["action"].ToString() == "Profile" ? "selected" : ""))">Мій профіль</a>
                 <form asp-controller="Authorization" asp-action="Logout" method="post">
                     <button type="submit" class="logout">Вийти</button>
                 </form>
