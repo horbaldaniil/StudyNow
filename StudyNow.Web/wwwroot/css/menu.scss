@@ -51,7 +51,6 @@
                 }
 
                 a {
-                    pointer-events: none;
                     color: #F7F3F2;
                 }
             }
@@ -101,6 +100,10 @@
             line-height: 24px;
             color: var(--grey);
             margin-top: 8px;
+            border: none;
+            background: none;
+            outline: none;
+            cursor: pointer;
         }
 
         a {

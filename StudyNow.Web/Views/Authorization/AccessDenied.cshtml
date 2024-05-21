@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Доступ заборонено";
+    var userType = ViewBag.UserType as StudyNow.Dal.Entities.UserType?;
+}
+
+<h2>Доступ заборонено</h2>
+<p>Ви не маєте дозволу на доступ до цієї сторінки.</p>
+
+@if (userType.HasValue)
+{
+    if (userType.Value == StudyNow.Dal.Entities.UserType.Student)
+    {
+        <a href="/student" class="btn btn-primary">Вернутися на головну сторінку.</a>
+    }
+    else if (userType.Value == StudyNow.Dal.Entities.UserType.Admin)
+    {
+        <a href="/admin" class="btn btn-primary">Вернутися на головну сторінку.</a>
+    }
+}
+else
+{
+    <a href="/" class="btn btn-primary">Вернутися на головну сторінку.</a>
+}

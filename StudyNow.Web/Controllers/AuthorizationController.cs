@@ -18,11 +18,27 @@ namespace StudyNow.Web.Controllers
         }
 
 
+        [HttpGet]
         [Route("")]
         [Route("Login")]
-        [HttpGet]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await _authService.GetCurrentUserAsync(HttpContext);
+                var userType = await _authService.GetUserTypeAsync(user.Email);
+                if (userType.HasValue)
+                {
+                    if (userType.Value == StudyNow.Dal.Entities.UserType.Student)
+                    {
+                        return RedirectToAction("", "Student");
+                    }
+                    else if (userType.Value == StudyNow.Dal.Entities.UserType.Admin)
+                    {
+                        return RedirectToAction("", "Admin");
+                    }
+                }
+            }
             return View();
         }
 
@@ -35,7 +51,15 @@ namespace StudyNow.Web.Controllers
                 var result = await _authService.LoginAsync(model.Email, model.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Calendar", "Student");
+                    var userType = await _authService.GetUserTypeAsync(model.Email);
+                    if (userType.Value == Dal.Entities.UserType.Student)
+                    {
+                        return RedirectToAction("", "student");
+                    }
+                    else if (userType.Value == Dal.Entities.UserType.Admin)
+                    {
+                        return RedirectToAction("", "admin");
+                    }
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
@@ -45,10 +69,11 @@ namespace StudyNow.Web.Controllers
         }
 
         [HttpPost]
+        [Route("Logout")]
         public async Task<IActionResult> Logout()
         {
             await _authService.LogoutAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Login");
         }
 
         [Route("register")]
@@ -97,9 +122,41 @@ namespace StudyNow.Web.Controllers
             return View(model);
         }
 
+        [HttpGet]
         [Route("register-admin")]
         public IActionResult RegisterAdmin()
         {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("register-admin")]
+        public async Task<IActionResult> RegisterAdmin(RegisterAdminViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _authService.RegisterAdminAsync(model.Email, model.Password, model.FirstName, model.SecondName, model.PhoneNumber);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [Route("AccessDenied")]
+        public async Task<IActionResult> AccessDenied()
+        {
+            var user = await _authService.GetCurrentUserAsync(HttpContext);
+            var userType = await _authService.GetUserTypeAsync(user.Email);
+            ViewBag.UserType = userType;
             return View();
         }
 

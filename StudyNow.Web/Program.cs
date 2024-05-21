@@ -15,6 +15,9 @@ builder.Services.AddIdentity<IdentityUser<Guid>, IdentityRole<Guid>>()
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ISubjectService, SubjectService>();
+builder.Services.AddScoped<IGroupService, GroupService>();
+builder.Services.AddScoped<ILessonService, LessonService>();
 
 builder.Services.AddControllersWithViews();
 

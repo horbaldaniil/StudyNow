@@ -18,16 +18,16 @@ namespace StudyNow.Dal.Entities
         public Guid SubjectId { get; set; }
 
         [StringLength(100)]
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         [StringLength(100)]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         [Required]
         public DateTime LessonTime { get; set; }
 
         [StringLength(500)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [Required]
         [StringLength(100)]

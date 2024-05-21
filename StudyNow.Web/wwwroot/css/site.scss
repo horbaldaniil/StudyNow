@@ -4,10 +4,14 @@
 @import "Pages/groups-admin.scss";
 @import "Pages/lessons-admin.scss";
 @import "Pages/assignments-admin.scss";
+@import "Pages/add-subject-admin.scss";
+@import "Pages/group-detail-admin.scss";
 @import "button.scss";
 @import "menu.scss";
 @import "title.scss";
 @import "css-vars.scss";
+@import "inputs.scss";
+@import "add-edit-section.scss";
 
 * {
     padding: 0;
@@ -32,4 +36,27 @@ body {
         width: 100%;
         padding: 40px 60px 0 60px;
     }
+}
+
+
+.field-validation-error {
+    color: red;
+    margin-top: 5px;
+}
+
+.validation-summary-errors {
+    ul {
+        list-style: none;
+        color: red;
+        margin-bottom: 15px;
+    }
+}
+
+.required {
+    color: red;
+}
+textarea {
+    resize: vertical;
+    max-height: 500px;
+    min-height: 200px;
 }

@@ -18,5 +18,13 @@
   {
     "outputFile": "wwwroot/css/Pages/signup.css",
     "inputFile": "wwwroot/css/Pages/signup.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Pages/add-subject-admin.css",
+    "inputFile": "wwwroot/css/Pages/add-subject-admin.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/add-edit-section.css",
+    "inputFile": "wwwroot/css/add-edit-section.scss"
   }
 ]

@@ -10,10 +10,10 @@ namespace StudyNow.Bll.Models
     {
         public Guid LessonId { get; set; }
         public Guid SubjectId { get; set; }
-        public string Location { get; set; }
-        public string Link { get; set; }
+        public string? Location { get; set; }
+        public string? Link { get; set; }
         public DateTime LessonTime { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public string TeacherName { get; set; }
         public Guid GroupId { get; set; }
         public SubjectDto Subject { get; set; }

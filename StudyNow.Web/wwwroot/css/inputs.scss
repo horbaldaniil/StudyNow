@@ -1,0 +1,34 @@
+.input {
+    border: 1px solid var(--orange);
+    border-radius: 2px;
+    padding: 10px;
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: #000;
+    background-color: transparent;
+}
+
+.input::placeholder {
+    color: var(--dark-grey);
+}
+
+.input:focus {
+    outline: none;
+}
+
+.select {
+    border: 1px solid var(--orange);
+    border-radius: 2px;
+    padding: 10px;
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: #000;
+    background-color: transparent;
+    width: 300px;
+}
+
+.select:focus {
+    outline: none;
+}

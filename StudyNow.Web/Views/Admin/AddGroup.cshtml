@@ -1,0 +1,21 @@
+﻿@model StudyNow.Web.Models.GroupViewModel
+
+@{
+    Layout = "_LayoutMenu";
+    ViewData["Title"] = "Групи";
+}
+
+<div class="title">
+    <h2>Додати групу</h2>
+</div>
+
+<div class="add-edit--section">
+    <form asp-action="AddGroup" method="post" class="inner">
+        <div class="form--block">
+            <label asp-for="Name">Назва<span class="required">*</span></label>
+            <input asp-for="Name" type="text" placeholder="Назва" class="input" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <button type="submit" class="button button-orange">Додати</button>
+    </form>
+</div>

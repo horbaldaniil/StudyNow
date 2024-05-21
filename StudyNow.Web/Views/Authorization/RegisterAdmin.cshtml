@@ -1,37 +1,47 @@
-﻿@{
+﻿@model StudyNow.Web.Models.RegisterAdminViewModel
+
+@{
     ViewData["Title"] = "Реєстрація адміна";
 }
+
 <a class="icon-back" asp-action="Register">
     <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 24 24" fill="none">
         <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
 </a>
+
 <div class="signup--section">
-    <div class="inner">
+    <form asp-action="RegisterAdmin" method="post" class="inner">
         <img src="/icons/logo.svg" />
         <h3>Реєстрація адміна</h3>
         <div class="form--list">
             <div class="form--block">
-                <label for="email">Пошта</label>
-                <input type="email" name="email" placeholder="your@mail.com" />
+                <label asp-for="Email">Пошта</label>
+                <input asp-for="Email" type="email" placeholder="your@mail.com" />
+                <span asp-validation-for="Email"></span>
             </div>
             <div class="form--block">
-                <label for="password">Пароль</label>
-                <input type="password" name="password" placeholder="yourpassword" />
+                <label asp-for="Password">Пароль</label>
+                <input asp-for="Password" type="password" placeholder="yourpassword" />
+                <span asp-validation-for="Password"></span>
             </div>
             <div class="form--block">
-                <label for="firstname">Ім'я</label>
-                <input type="text" name="firstname" placeholder="First name" />
+                <label asp-for="FirstName">Ім'я</label>
+                <input asp-for="FirstName" type="text" placeholder="First name" />
+                <span asp-validation-for="FirstName"></span>
             </div>
             <div class="form--block">
-                <label for="secondname">Прізвище</label>
-                <input type="text" name="secondname" placeholder="Second name" />
+                <label asp-for="SecondName">Прізвище</label>
+                <input asp-for="SecondName" type="text" placeholder="Second name" />
+                <span asp-validation-for="SecondName"></span>
             </div>
             <div class="form--block">
-                <label for="phonenumber">Номер телефону</label>
-                <input type="tel" name="phonenumber" placeholder="380 00 111 2222" />
+                <label asp-for="PhoneNumber">Номер телефону</label>
+                <input asp-for="PhoneNumber" type="tel" placeholder="380 00 111 2222" />
+                <span asp-validation-for="PhoneNumber"></span>
             </div>
         </div>
-        <button class="button button-orange">Зареєструватися</button>
-    </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <button type="submit" class="button button-orange">Зареєструватися</button>
+    </form>
 </div>

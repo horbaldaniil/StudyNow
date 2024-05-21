@@ -193,6 +193,12 @@
   display: flex;
   gap: 35px;
 }
+.subjects-admin--section-list-item-buttons button {
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
 
 .groups-admin--section-list {
   display: grid;
@@ -210,17 +216,27 @@
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05);
   position: relative;
 }
-.groups-admin--section-list-item p {
+.groups-admin--section-list-item a {
   font-weight: 600;
   font-size: 24px;
   line-height: 29px;
   color: #000000;
+  text-decoration: none;
+}
+.groups-admin--section-list-item a:hover {
+  color: #555;
 }
 .groups-admin--section-list-item-buttons {
   position: absolute;
   right: 20px;
   display: flex;
   gap: 35px;
+}
+.groups-admin--section-list-item-buttons button {
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
 }
 
 .lessons-admin--section-list {
@@ -269,6 +285,12 @@
   display: flex;
   gap: 35px;
 }
+.lessons-admin--section-list-item-buttons button {
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
 
 .assignments-admin--section-list {
   display: grid;
@@ -312,6 +334,30 @@
   top: 23px;
   display: flex;
   gap: 35px;
+}
+.assignments-admin--section-list-item-buttons button {
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.group-detail-admin--section h3 {
+  font-size: 24px;
+  color: var(--dark);
+  margin-bottom: 20px;
+}
+.group-detail-admin--section-list {
+  background-color: white;
+  border-radius: 5px;
+  width: 100%;
+}
+.group-detail-admin--section-list th {
+  text-align: left;
+  padding: 10px;
+}
+.group-detail-admin--section-list td {
+  padding: 10px;
 }
 
 .button {
@@ -386,7 +432,6 @@
   border-radius: 5px 0px 0px 5px;
 }
 .menu .menu--list ul .selected a {
-  pointer-events: none;
   color: #F7F3F2;
 }
 .menu .menu--list ul li :nth-last-child(1) {
@@ -428,6 +473,10 @@
   line-height: 24px;
   color: var(--grey);
   margin-top: 8px;
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
 }
 .menu .account a {
   text-decoration: none;
@@ -461,6 +510,57 @@
   --orange: #E67A4D;
 }
 
+.input {
+  border: 1px solid var(--orange);
+  border-radius: 2px;
+  padding: 10px;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: #000;
+  background-color: transparent;
+}
+
+.input::placeholder {
+  color: var(--dark-grey);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.select {
+  border: 1px solid var(--orange);
+  border-radius: 2px;
+  padding: 10px;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: #000;
+  background-color: transparent;
+  width: 300px;
+}
+
+.select:focus {
+  outline: none;
+}
+
+.add-edit--section .inner {
+  margin-top: 40px;
+}
+.add-edit--section .inner .form--block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.add-edit--section .inner .form--block label {
+  margin-bottom: 5px;
+  font-size: 24px;
+}
+.add-edit--section .inner .form--block input {
+  width: 300px;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -484,4 +584,25 @@ body {
 .layout--menu .content {
   width: 100%;
   padding: 40px 60px 0 60px;
+}
+
+.field-validation-error {
+  color: red;
+  margin-top: 5px;
+}
+
+.validation-summary-errors ul {
+  list-style: none;
+  color: red;
+  margin-bottom: 15px;
+}
+
+.required {
+  color: red;
+}
+
+textarea {
+  resize: vertical;
+  max-height: 500px;
+  min-height: 200px;
 }

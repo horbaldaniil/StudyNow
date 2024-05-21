@@ -1,0 +1,22 @@
+.group-detail-admin--section {
+    h3 {
+        font-size: 24px;
+        color: var(--dark);
+        margin-bottom: 20px;
+    }
+
+    &-list {
+        background-color: white;
+        border-radius: 5px;
+        width: 100%;
+
+        th {
+            text-align: left;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+        }
+    }
+}

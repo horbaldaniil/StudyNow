@@ -1,0 +1,43 @@
+﻿@model StudyNow.Web.Models.GroupDetailsViewModel
+
+@{
+    Layout = "_LayoutMenu";
+    ViewData["Title"] = "Група - " + Model.Name;
+}
+
+
+<div class="title">
+    <h2>@ViewData["Title"]</h2>
+</div>
+
+<div class="group-detail-admin--section">
+    <div class="inner">
+        <h3>Список студентів (@Model.Students.Count):</h3>
+        @if (Model.Students.Any())
+        {
+            <table class="group-detail-admin--section-list">
+                <thead>
+                    <tr>
+                        <th>Ім'я</th>
+                        <th>Прізвище</th>
+                        <th>Пошта</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var student in Model.Students)
+                    {
+                        <tr class="group-detail-admin--section-list-item">
+                            <td>@student.FirstName</td>
+                            <td>@student.SecondName</td>
+                            <td>@student.Email</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>У цій групі немає студентів.</p>
+        }
+    </div>
+</div>

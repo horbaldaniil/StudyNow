@@ -1,4 +1,17 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using StudyNow.Dal
+@using StudyNow.Dal.Entities
+@inject SignInManager<IdentityUser<Guid>> SignInManager
+@inject UserManager<IdentityUser<Guid>> UserManager
+@inject StudyNowContext DbContext
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var appUser = user != null ? DbContext.Users.FirstOrDefault(u => u.UserId == user.Id) : null;
+    var userType = appUser?.Type;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -18,30 +31,53 @@
             <img src="/icons/logo-white.svg" />
             <div class="menu--list">
                 <ul>
-                    <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "Subjects" ? "selected" : ""))">
-                        <a asp-controller="Admin" asp-action="Subjects">Навчальні предмети</a>
-                    </li>
-                    <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "Groups" ? "selected" : ""))">
-                        <a asp-controller="Admin" asp-action="Groups">Групи</a>
-                    </li>
-                    <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "Lessons" ? "selected" : ""))">
-                        <a asp-controller="Admin" asp-action="Lessons">Заняття</a>
-                    </li>
-                    <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "Assignments" ? "selected" : ""))">
-                        <a asp-controller="Admin" asp-action="Assignments">Завдання</a>
-                    </li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        {
+                            @if (userType == UserType.Student)
+                            {
+                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Calendar" ? "selected" : ""))"><a href="/student/calendar">Календар</a></li>
+                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Assignments" ? "selected" : ""))"><a href="/student/assignments">Завдання</a></li>
+                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Curriculum" ? "selected" : ""))"><a href="/student/curriculum">Навчальний план</a></li>
+                            }
+                            else if (userType == UserType.Admin)
+                            {
+                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" && 
+                                (ViewContext.RouteData.Values["action"].ToString() == "Subjects" ||
+                                ViewContext.RouteData.Values["action"].ToString() == "AddSubject" || 
+                                ViewContext.RouteData.Values["action"].ToString() == "EditSubject")  ? 
+                                "selected" : ""))">
+                                    <a href="/admin/subjects">Навчальні предмети</a>
+                                </li>
+                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" && 
+                                ViewContext.RouteData.Values["action"].ToString() == "Groups" ||
+                                ViewContext.RouteData.Values["action"].ToString() == "AddGroup" ||
+                                ViewContext.RouteData.Values["action"].ToString() == "EditGroup" ||
+                                ViewContext.RouteData.Values["action"].ToString() == "GroupDetails" ?
+                                "selected" : ""))"><a href="/admin/groups">Групи</a></li>
+                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" &&
+                                ViewContext.RouteData.Values["action"].ToString() == "Lessons" ||
+                                ViewContext.RouteData.Values["action"].ToString() == "AddLesson" ||
+                                ViewContext.RouteData.Values["action"].ToString() == "EditLesson" ? 
+                                "selected" : ""))"><a href="/admin/lessons">Заняття</a></li>
+                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Admin" && ViewContext.RouteData.Values["action"].ToString() == "Assignments" ? "selected" : ""))"><a href="/admin/assignments">Завдання</a></li>
+                            }
+                        }
+                    }                    
                 </ul>
             </div>
             <div class="account">
                 <h3>Ви увійшли як</h3>
-                <h4>Прізвище Ім’я</h4>
+                <h4>@appUser.SecondName @appUser.FirstName</h4>
                 <a class="button button-dark">Мій профіль</a>
-                <a asp-controller="Authorization" asp-action="Login" class="logout">Вийти</a>
+                <form asp-controller="Authorization" asp-action="Logout" method="post">
+                    <button type="submit" class="logout">Вийти</button>
+                </form>
             </div>
         </div>
         <div class="content">
             @RenderBody()
-        </div>
+        </div>  
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
