@@ -35,14 +35,14 @@ namespace StudyNow.Web.Controllers
                 Description = s.Description
             });
 
-            return View(model);
+            return View("Subject/Subjects", model);
         }
 
         [HttpGet]
         [Route("add-subject")]
         public IActionResult AddSubject()
         {
-            return View();
+            return View("Subject/AddSubject");
         }
 
         [HttpPost]
@@ -60,7 +60,7 @@ namespace StudyNow.Web.Controllers
                 await _subjectService.AddSubjectAsync(subject);
                 return RedirectToAction("Subjects");
             }
-            return View(model);
+            return View("Subject/AddSubject", model);
         }
 
         [HttpGet]
@@ -78,7 +78,7 @@ namespace StudyNow.Web.Controllers
                 Name = subject.Name,
                 Description = subject.Description
             };
-            return View(model);
+            return View("Subject/EditSubject",model);
         }
 
         [HttpPost]
@@ -96,7 +96,7 @@ namespace StudyNow.Web.Controllers
                 await _subjectService.UpdateSubjectAsync(subject);
                 return RedirectToAction("Subjects");
             }
-            return View(model);
+            return View("Subject/EditSubject", model);
         }
 
         [HttpPost]
@@ -120,7 +120,7 @@ namespace StudyNow.Web.Controllers
                     Name = g.Name
                 });
 
-            return View(model);
+            return View("Group/Groups", model);
         }
 
         [HttpGet]
@@ -150,14 +150,14 @@ namespace StudyNow.Web.Controllers
 
             ViewData["Title"] = group.Name;
 
-            return View(model);
+            return View("Group/GroupDetails", model);
         }
 
         [HttpGet]
         [Route("add-group")]
         public IActionResult AddGroup()
         {
-            return View();
+            return View("Group/AddGroup");
         }
 
         [HttpPost]
@@ -174,7 +174,7 @@ namespace StudyNow.Web.Controllers
                 await _groupService.AddGroupAsync(group);
                 return RedirectToAction("Groups");
             }
-            return View(model);
+            return View("Group/AddGroup", model);
         }
 
         [HttpGet]
@@ -191,7 +191,7 @@ namespace StudyNow.Web.Controllers
                 GroupId = group.GroupId,
                 Name = group.Name
             };
-            return View(model);
+            return View("Group/EditGroup", model);
         }
 
         [HttpPost]
@@ -208,7 +208,7 @@ namespace StudyNow.Web.Controllers
                 await _groupService.UpdateGroupAsync(group);
                 return RedirectToAction("Groups");
             }
-            return View(model);
+            return View("Group/EditGroup", model);
         }
 
         [HttpPost]
@@ -236,7 +236,7 @@ namespace StudyNow.Web.Controllers
                 SubjectName = l.Subject.Name
             });
 
-            return View(model);
+            return View("Lesson/Lessons", model);
         }
         [HttpGet]
         [Route("add-lesson")]
@@ -258,7 +258,7 @@ namespace StudyNow.Web.Controllers
                     Name = s.Name
                 }).ToList()
             };
-            return View(model);
+            return View("Lesson/AddLesson", model);
         }
 
         [HttpPost]
@@ -313,7 +313,7 @@ namespace StudyNow.Web.Controllers
                 SubjectId = s.SubjectId,
                 Name = s.Name
             }).ToList();
-            return View(model);
+            return View("Lesson/AddLesson", model);
         }
 
         [HttpGet]
@@ -348,7 +348,7 @@ namespace StudyNow.Web.Controllers
                     Name = s.Name
                 }).ToList()
             };
-            return View(model);
+            return View("Lesson/EditLesson", model);
         }
 
         [HttpPost]
@@ -406,7 +406,7 @@ namespace StudyNow.Web.Controllers
                 SubjectId = s.SubjectId,
                 Name = s.Name
             }).ToList();
-            return View(model);
+            return View("Lesson/EditLesson", model);
         }
 
         [HttpPost]
@@ -421,7 +421,7 @@ namespace StudyNow.Web.Controllers
         [Route("assignments")]
         public IActionResult Assignments()
         {
-            return View();
+            return View("Assignment/Assignments");
         }
     }
 }

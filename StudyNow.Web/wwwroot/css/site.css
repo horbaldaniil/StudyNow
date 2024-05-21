@@ -360,6 +360,24 @@
   padding: 10px;
 }
 
+.access-denied--section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.access-denied--section svg {
+  width: 200px;
+  height: 200px;
+  fill: var(--orange);
+  margin-bottom: 20px;
+}
+.access-denied--section h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
 .button {
   border: none;
   border-radius: 2px;
