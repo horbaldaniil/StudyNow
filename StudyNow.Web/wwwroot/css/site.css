@@ -595,6 +595,8 @@ body {
   list-style: none;
   color: red;
   margin-bottom: 15px;
+  max-width: 300px;
+  text-align: center;
 }
 
 .required {

@@ -7,11 +7,11 @@ namespace StudyNow.Web.Models
     {
         public Guid SubjectId { get; set; }
 
-        [Required(ErrorMessage = "Назва навчального предмета є обов'язковою.")]
+        [Required(ErrorMessage = "Необхідно ввести назву навчального предмета.")]
         [StringLength(100)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Опис навчального предмета є обов'язковою.")]
+        [Required(ErrorMessage = "Необхідно ввести опис навчального предмета.")]
         [StringLength(500)]
         public string Description { get; set; }
     }

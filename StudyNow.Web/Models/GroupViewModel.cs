@@ -6,7 +6,7 @@ namespace StudyNow.Web.Models
     {
         public Guid GroupId { get; set; }
 
-        [Required(ErrorMessage = "Назва групи є обов'язковим.")]
+        [Required(ErrorMessage = "Необхідно ввести назву групи.")]
         [StringLength(100)]
         public string Name { get; set; }
     }

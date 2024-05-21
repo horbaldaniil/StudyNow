@@ -6,23 +6,23 @@ namespace StudyNow.Web.Models
 {
     public class RegisterAdminViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Необхідно ввести пошту.")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Необхідно ввести пароль.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Необхідно ввести ім'я.")]
         [StringLength(100)]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Необхідно ввести прізвище.")]
         [StringLength(100)]
         public string SecondName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Необхідно ввести номер телефону.")]
         [Phone]
         public string PhoneNumber { get; set; }
     }

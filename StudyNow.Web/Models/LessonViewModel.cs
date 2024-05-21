@@ -17,7 +17,7 @@ namespace StudyNow.Web.Models
         [StringLength(100)]
         public string? Link { get; set; }
 
-        [Required(ErrorMessage = "Ім'я та прізвище вчителя є обов'язковим.")]
+        [Required(ErrorMessage = "Необхідно ввести ім'я та прізвище викладача.")]
         [StringLength(100)]
         public string TeacherName { get; set; }
 

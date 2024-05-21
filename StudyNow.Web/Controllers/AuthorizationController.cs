@@ -62,7 +62,7 @@ namespace StudyNow.Web.Controllers
                     }
                 }
 
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                ModelState.AddModelError(string.Empty, "Неправильна спроба входу в систему. Спробуйте знову.");
             }
 
             return View(model);
@@ -99,7 +99,14 @@ namespace StudyNow.Web.Controllers
         [Route("register-student")]
         public async Task<IActionResult> RegisterStudent(RegisterStudentViewModel model)
         {
-            if (ModelState.IsValid)
+            bool isValid = true;
+
+            if (model.GroupId == Guid.Empty)
+            {
+                ModelState.AddModelError("GroupId", "Необхідно вибрати навчальну групу.");
+                isValid = false;
+            }
+            else if (ModelState.IsValid)
             {
                 var result = await _authService.RegisterStudentAsync(model.Email, model.Password, model.FirstName, model.SecondName, model.PhoneNumber, model.GroupId);
                 if (result.Succeeded)
