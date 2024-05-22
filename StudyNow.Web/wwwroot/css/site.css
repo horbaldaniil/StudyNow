@@ -419,6 +419,10 @@
 .profile--body-general-info-list-item-icon {
   margin-right: 25px;
 }
+.profile--body-general-info-list-item-icon svg {
+  width: 40px;
+  height: 40px;
+}
 .profile--body-general-info-list-item h5 {
   font-weight: 400;
   font-size: 20px;
