@@ -468,6 +468,7 @@
 .assignments-student--section-list-item .datetime {
   position: absolute;
   right: 30px;
+  text-align: center;
 }
 .assignments-student--section-list-item .datetime h5 {
   font-weight: 600;

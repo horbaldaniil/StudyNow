@@ -14,13 +14,15 @@ namespace StudyNow.Web.Controllers
     public class StudentController : Controller
     {
         private readonly ILessonStudentService _lessonService;
+        private readonly IAssignmentStudentService _assignmentService;
         private readonly UserManager<IdentityUser<Guid>> _userManager;
         private readonly SignInManager<IdentityUser<Guid>> _signInManager;
         private readonly IUserService _userService;
 
-        public StudentController(ILessonStudentService lessonService, UserManager<IdentityUser<Guid>> userManager, SignInManager<IdentityUser<Guid>> signInManager, IUserService userService)
+        public StudentController(IAssignmentStudentService assignmentService, ILessonStudentService lessonService, UserManager<IdentityUser<Guid>> userManager, SignInManager<IdentityUser<Guid>> signInManager, IUserService userService)
         {
             _userManager = userManager;
+            _assignmentService = assignmentService;
             _signInManager = signInManager;
             _userService = userService;
             _lessonService = lessonService;
@@ -57,10 +59,53 @@ namespace StudyNow.Web.Controllers
             return View("Calendar/Calendar", model);
         }
 
+        [HttpGet]
         [Route("assignments")]
-        public IActionResult Assignments()
+        public async Task<IActionResult> Assignments()
         {
-            return View("Assignment/Assignments");
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Authorization");
+            }
+
+            var appUser = await _userService.GetUserByIdAsync(user.Id);
+            if (appUser.Student == null)
+            {
+                return RedirectToAction("Login", "Authorization");
+            }
+
+            var groupId = appUser.Student.GroupId;
+            var assignments = await _assignmentService.GetAssignmentsByGroupIdAsync(groupId);
+
+            var model = assignments.Select(a => new AssignmentStudentViewModel
+            {
+                AssignmentId = a.AssignmentId,
+                Title = a.Title,
+                SubjectName = a.Subject.Name,
+                Description = a.Description,
+                Deadline = a.Deadline
+            }).ToList();
+
+            return View("Assignment/Assignments", model);
+        }
+
+        [HttpGet]
+        [Route("assignment/{id}")]
+        public async Task<IActionResult> AssignmentDetails(Guid id)
+        {
+            var assignment = await _assignmentService.GetAssigmentByIdAsync(id);
+
+            var model = new AssignmentStudentViewModel
+            {
+                AssignmentId = assignment.AssignmentId,
+                Title = assignment.Title,
+                SubjectName = assignment.Subject.Name,
+                Description = assignment.Description,
+                Deadline = assignment.Deadline
+            };
+
+            return View("Assignment/AssignmentDetails", model);
         }
 
         [Route("curriculum")]

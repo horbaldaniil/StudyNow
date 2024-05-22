@@ -21,6 +21,7 @@ builder.Services.AddScoped<ILessonService, LessonService>();
 builder.Services.AddScoped<IAssignmentService, AssignmentService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILessonStudentService, LessonStudentService>();
+builder.Services.AddScoped<IAssignmentStudentService, AssignmentStudentService>();
 
 builder.Services.AddControllersWithViews();
 

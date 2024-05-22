@@ -1,0 +1,28 @@
+﻿@model StudyNow.Web.Models.AssignmentStudentViewModel
+
+@{
+    Layout = "_LayoutMenu";
+    ViewData["Title"] = "Завдання";
+}
+
+<div class="title">
+    <h2>@ViewData["Title"]</h2>
+</div>
+
+<div class="assignments-student--section">
+    <div class="inner">
+        <div class="assignments-student--section-list">
+
+            <div class="assignments-student--section-list-item">
+                <h3>@Model.Title</h3>
+                <p>@Model.SubjectName</p>
+                <p>@Model.Description</p>
+                <div class="datetime">
+                    <h5 class="date">@Model.Deadline.ToString("dd.MM")</h5>
+                    <h5 class="time">@Model.Deadline.ToString("HH:mm")</h5>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
