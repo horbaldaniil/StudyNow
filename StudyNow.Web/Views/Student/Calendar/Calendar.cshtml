@@ -1,0 +1,37 @@
+﻿@model IEnumerable<StudyNow.Web.Models.LessonStudentViewModel>
+
+@{
+    Layout = "_LayoutMenu";
+    ViewData["Title"] = "Каледар";
+}
+
+
+<div class="title">
+    <h2>@ViewData["Title"]</h2>
+</div>
+
+<div class="calendar-student--section">
+    <div class="inner">
+        <div class="calendar-student--section-list">
+            @foreach (var lesson in Model)
+            {
+                <div class="calendar-student--section-list-item">
+                    <h3>@lesson.SubjectName</h3>
+                    @if (lesson.Location != null)
+                    {
+                        <p>@lesson.Location</p>
+                    }
+                    else if (lesson.Link != null)
+                    {
+                        <a target="_blank" href="@lesson.Link">@lesson.Link</a>
+                    }
+                    <p>@lesson.TeacherName</p>
+                    <div class="datetime">
+                        <h5 class="date">@lesson.LessonTime.ToString("dd.MM")</h5>
+                        <h5 class="time">@lesson.LessonTime.ToString("HH:mm")</h5>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

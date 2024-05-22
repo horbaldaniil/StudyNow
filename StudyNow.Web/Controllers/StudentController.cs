@@ -13,33 +13,60 @@ namespace StudyNow.Web.Controllers
     [RoleAuthorization(UserType.Student)]
     public class StudentController : Controller
     {
+        private readonly ILessonStudentService _lessonService;
         private readonly UserManager<IdentityUser<Guid>> _userManager;
         private readonly SignInManager<IdentityUser<Guid>> _signInManager;
         private readonly IUserService _userService;
 
-        public StudentController(UserManager<IdentityUser<Guid>> userManager, SignInManager<IdentityUser<Guid>> signInManager, IUserService userService)
+        public StudentController(ILessonStudentService lessonService, UserManager<IdentityUser<Guid>> userManager, SignInManager<IdentityUser<Guid>> signInManager, IUserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _userService = userService;
+            _lessonService = lessonService;
         }
         [Route("")]
         [Route("calendar")]
-        public IActionResult Calendar()
+        public async Task<IActionResult> Calendar()
         {
-            return View();
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Authorization");
+            }
+
+            var appUser = await _userService.GetUserByIdAsync(user.Id);
+            if (appUser.Student == null)
+            {
+                return RedirectToAction("Login", "Authorization");
+            }
+
+            var groupId = appUser.Student.GroupId;
+            var lessons = await _lessonService.GetLessonsByGroupIdAsync(groupId);
+
+            var model = lessons.Select(l => new LessonStudentViewModel
+            {
+                LessonId = l.LessonId,
+                SubjectName = l.Subject.Name,
+                TeacherName = l.TeacherName,
+                Location = l.Location,
+                Link = l.Link,
+                LessonTime = l.LessonTime
+            }).ToList();
+
+            return View("Calendar/Calendar", model);
         }
 
         [Route("assignments")]
         public IActionResult Assignments()
         {
-            return View();
+            return View("Assignment/Assignments");
         }
 
         [Route("curriculum")]
         public IActionResult Curriculum()
         {
-            return View();
+            return View("Curriculum/Curriculum");
         }
 
         [HttpGet]

@@ -1,0 +1,63 @@
+.calendar-student--section {
+
+    &-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+
+
+        &-item {
+            position: relative;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 5px;
+            box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05);
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+
+            h3 {
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 29px;
+                color: #000000;
+            }
+
+            p, a {
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 19px;
+                color: #555555;
+                margin-top: 10px;
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: #000;
+            }
+
+            .datetime {
+                position: absolute;
+                right: 30px;
+
+                h5 {
+                    font-weight: 600;
+                    font-size: 24px;
+                    line-height: 29px;
+                    color: var(--dark);
+                }
+
+                h5:nth-last-child(1) {
+                    &:before {
+                        content: "";
+                        display: block;
+                        height: 2px;
+                        width: 100%;
+                        background: var(--dark);
+                    }
+                }
+            }
+        }
+    }
+}
