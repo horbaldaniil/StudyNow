@@ -19,6 +19,11 @@ namespace StudyNow.Dal.Entities
         [StringLength(500)]
         public string Description { get; set; }
 
+        [Required]
+        public Guid GroupId { get; set; }
+
+        public Group Group { get; set; }
+
         public ICollection<Lesson> Lessons { get; set; }
         public ICollection<Assignment> Assignments { get; set; }
     }

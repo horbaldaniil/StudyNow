@@ -13,19 +13,21 @@ namespace StudyNow.Web.Controllers
     [RoleAuthorization(UserType.Student)]
     public class StudentController : Controller
     {
+        private readonly ISubjectStudentService _subjectService;
         private readonly ILessonStudentService _lessonService;
         private readonly IAssignmentStudentService _assignmentService;
         private readonly UserManager<IdentityUser<Guid>> _userManager;
         private readonly SignInManager<IdentityUser<Guid>> _signInManager;
         private readonly IUserService _userService;
 
-        public StudentController(IAssignmentStudentService assignmentService, ILessonStudentService lessonService, UserManager<IdentityUser<Guid>> userManager, SignInManager<IdentityUser<Guid>> signInManager, IUserService userService)
+        public StudentController(ISubjectStudentService subjectService, IAssignmentStudentService assignmentService, ILessonStudentService lessonService, UserManager<IdentityUser<Guid>> userManager, SignInManager<IdentityUser<Guid>> signInManager, IUserService userService)
         {
             _userManager = userManager;
             _assignmentService = assignmentService;
             _signInManager = signInManager;
             _userService = userService;
             _lessonService = lessonService;
+            _subjectService = subjectService;
         }
         [Route("")]
         [Route("calendar")]
@@ -108,10 +110,34 @@ namespace StudyNow.Web.Controllers
             return View("Assignment/AssignmentDetails", model);
         }
 
+        [HttpGet]
         [Route("curriculum")]
-        public IActionResult Curriculum()
+        public async Task<IActionResult> Curriculum()
         {
-            return View("Curriculum/Curriculum");
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Authorization");
+            }
+
+            var appUser = await _userService.GetUserByIdAsync(user.Id);
+            if (appUser.Student == null)
+            {
+                return RedirectToAction("Login", "Authorization");
+            }
+
+            var groupId = appUser.Student.GroupId;
+            var subjects = await _subjectService.GetSubjectsByGroupIdAsync(groupId);
+
+            var model = subjects.Select(a => new SubjectViewModel
+            {
+                SubjectId = a.SubjectId,
+                Name = a.Name,
+                GroupName = a.Group.Name,
+                Description = a.Description
+            }).ToList();
+
+            return View("Curriculum/Curriculum", model);
         }
 
         [HttpGet]

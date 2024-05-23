@@ -36,9 +36,19 @@
                         {
                             @if (userType == UserType.Student)
                             {
-                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Calendar" ? "selected" : ""))"><a href="/student/calendar">Календар</a></li>
-                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Assignments" ? "selected" : ""))"><a href="/student/assignments">Завдання</a></li>
-                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Student" && ViewContext.RouteData.Values["action"].ToString() == "Curriculum" ? "selected" : ""))"><a href="/student/curriculum">Навчальний план</a></li>
+                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Student" &&
+                                ViewContext.RouteData.Values["action"].ToString() == "Calendar" ? "selected" : ""))">
+                                    <a href="/student/calendar">Календар</a>
+                                </li>
+                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Student" && 
+                                ViewContext.RouteData.Values["action"].ToString() == "Assignments" ||
+                                ViewContext.RouteData.Values["action"].ToString() == "AssignmentDetails" ? "selected": ""))">
+                                    <a href="/student/assignments">Завдання</a>
+                                </li>
+                                <li class="@((ViewContext.RouteData.Values["controller"].ToString() == "Student" && 
+                                ViewContext.RouteData.Values["action"].ToString() == "Curriculum" ? "selected" : ""))">
+                                    <a href="/student/curriculum">Навчальний план</a>
+                                </li>
                             }
                             else if (userType == UserType.Admin)
                             {

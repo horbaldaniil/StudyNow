@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace StudyNow.Bll.Models
 {
@@ -11,6 +7,8 @@ namespace StudyNow.Bll.Models
         public Guid SubjectId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public Guid GroupId { get; set; }
+        public GroupDto Group { get; set; }
         public ICollection<LessonDto> Lessons { get; set; }
         public ICollection<AssignmentDto> Assignments { get; set; }
     }

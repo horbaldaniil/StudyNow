@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace StudyNow.Web.Models
@@ -14,5 +15,15 @@ namespace StudyNow.Web.Models
         [Required(ErrorMessage = "Необхідно ввести опис навчального предмета.")]
         [StringLength(500)]
         public string Description { get; set; }
+
+        [Required]
+        public Guid GroupId { get; set; }
+
+        [ValidateNever]
+        public string GroupName { get; set; }
+
+        [ValidateNever]
+        public List<GroupViewModel> Groups { get; set; }
+
     }
 }

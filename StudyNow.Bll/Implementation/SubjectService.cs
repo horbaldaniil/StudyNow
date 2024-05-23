@@ -16,12 +16,12 @@ namespace StudyNow.Bll.Implementation
 
         public async Task<IEnumerable<Subject>> GetAllSubjectsAsync()
         {
-            return await _context.Subjects.ToListAsync();
+            return await _context.Subjects.Include(s => s.Group).ToListAsync();
         }
 
         public async Task<Subject> GetSubjectByIdAsync(Guid subjectId)
         {
-            return await _context.Subjects.FindAsync(subjectId);
+            return await _context.Subjects.Include(s => s.Group).FirstOrDefaultAsync(s => s.SubjectId == subjectId);
         }
 
         public async Task AddSubjectAsync(Subject subject)

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StudyNow.Dal;
@@ -11,9 +12,11 @@ using StudyNow.Dal;
 namespace StudyNow.Dal.Migrations
 {
     [DbContext(typeof(StudyNowContext))]
-    partial class StudyNowContextModelSnapshot : ModelSnapshot
+    [Migration("20240522183301_SubjectChange")]
+    partial class SubjectChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

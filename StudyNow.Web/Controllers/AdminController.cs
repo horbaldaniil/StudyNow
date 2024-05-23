@@ -41,6 +41,8 @@ namespace StudyNow.Web.Controllers
             {
                 SubjectId = s.SubjectId,
                 Name = s.Name,
+                GroupId = s.GroupId,
+                GroupName = s.Group.Name,
                 Description = s.Description
             });
 
@@ -49,26 +51,52 @@ namespace StudyNow.Web.Controllers
 
         [HttpGet]
         [Route("add-subject")]
-        public IActionResult AddSubject()
+        public async Task<IActionResult> AddSubject()
         {
-            return View("Subject/AddSubject");
+            var groups = await _groupService.GetAllGroupsAsync();
+            var model = new SubjectViewModel
+            {
+                Groups = groups.Select(g => new GroupViewModel
+                {
+                    GroupId = g.GroupId,
+                    Name = g.Name
+                }).ToList(),
+            };
+            return View("Subject/AddSubject", model);
         }
 
         [HttpPost]
         [Route("add-subject")]
         public async Task<IActionResult> AddSubject(SubjectViewModel model)
         {
+            bool isValid = true;
+
+            if (model.GroupId == Guid.Empty)
+            {
+                ModelState.AddModelError("GroupId", "Необхідно вибрати групу.");
+                isValid = false;
+            }
+
             if (ModelState.IsValid)
             {
                 var subject = new Subject
                 {
                     SubjectId = Guid.NewGuid(),
                     Name = model.Name,
+                    GroupId = model.GroupId,
                     Description = model.Description
                 };
                 await _subjectService.AddSubjectAsync(subject);
                 return RedirectToAction("Subjects");
             }
+
+            var groups = await _groupService.GetAllGroupsAsync();
+            model.Groups = groups.Select(g => new GroupViewModel
+            {
+                GroupId = g.GroupId,
+                Name = g.Name
+            }).ToList();
+
             return View("Subject/AddSubject", model);
         }
 
@@ -81,11 +109,20 @@ namespace StudyNow.Web.Controllers
             {
                 return NotFound();
             }
+            var groups = await _groupService.GetAllGroupsAsync();
+
             var model = new SubjectViewModel
             {
                 SubjectId = subject.SubjectId,
                 Name = subject.Name,
-                Description = subject.Description
+                GroupId = subject.GroupId,
+                GroupName = subject.Group.Name,
+                Description = subject.Description,
+                Groups = groups.Select(g => new GroupViewModel
+                {
+                    GroupId = g.GroupId,
+                    Name = g.Name
+                }).ToList(),
             };
             return View("Subject/EditSubject",model);
         }
@@ -100,11 +137,18 @@ namespace StudyNow.Web.Controllers
                 {
                     SubjectId = model.SubjectId,
                     Name = model.Name,
+                    GroupId = model.GroupId,
                     Description = model.Description
                 };
                 await _subjectService.UpdateSubjectAsync(subject);
                 return RedirectToAction("Subjects");
             }
+            var groups = await _groupService.GetAllGroupsAsync();
+            model.Groups = groups.Select(g => new GroupViewModel
+            {
+                GroupId = g.GroupId,
+                Name = g.Name
+            }).ToList();
             return View("Subject/EditSubject", model);
         }
 
