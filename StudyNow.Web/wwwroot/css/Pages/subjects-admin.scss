@@ -14,16 +14,21 @@
             padding-left: 30px;
             box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.05);
             position: relative;
+            justify-content: space-between;
 
             p {
                 font-weight: 600;
                 font-size: 24px;
                 line-height: 29px;
                 color: #000000;
+                width: 70%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             &-buttons {
-                position: absolute;
+                position: relative;
                 right: 20px;
                 display: flex;
                 gap: 35px;

@@ -191,7 +191,8 @@ namespace StudyNow.Web.Controllers
                 UserId = s.User.UserId,
                 FirstName = s.User.FirstName,
                 SecondName = s.User.SecondName,
-                Email = s.User.Email
+                Email = s.User.Email,
+                PhoneNumber = s.User.PhoneNumber,
             }).ToList() ?? new List<StudentViewModel>();
 
             var model = new GroupDetailsViewModel

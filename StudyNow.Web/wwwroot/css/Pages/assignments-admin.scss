@@ -27,6 +27,10 @@
                 font-size: 16px;
                 line-height: 19px;
                 color: #555555;
+                width: 70%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             h5 {
@@ -34,7 +38,7 @@
                 margin-top: 5px;
             }
 
-            .group, .teacher {
+            .groups, .teacher {
                 position: absolute;
                 bottom: 30px;
             }
